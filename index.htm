@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="viewport"/>
+
+        <title>TGE SpriteSheetAnimation Tutorial</title>
+
+        <!-- Stylesheet -->
+        <link rel="stylesheet" href="style.css"/>
+
+        <!-- TreSensa Game Engine files -->
+        <script src="lib/viewporter.js"></script>
+        <script src="lib/PxLoader.js"></script>
+        <script src="lib/PxLoaderImage.js"></script>
+        <script src="tge-1.0.0.min.js"></script>
+
+        <!-- Project files  -->
+        <script src="gamelib.js"></script>
+		<script src="Assets.js"></script>
+		<script src="StartScreen.js"></script>
+        <script src="GameScreen.js"></script>
+		<script src="EndScreen.js"></script>
+		
+        <!-- TreSensa Game Engine -->
+        <script type="text/javascript">
+            function initializeTGE() {
+                var _myGame = new MyGame();
+                if(_myGame.IsPlatformAcceptable()) { 
+                    _myGame.Launch( {gameDiv:"game_canvas"} );
+                }
+                else
+                {
+                    // Handle rejected platform as desired...
+                }
+            }
+            window.addEventListener ? window.addEventListener("load",initializeTGE,false) : window.attachEvent && window.attachEvent("onload",initializeTGE);
+        </script>
+    </head>
+    <body>
+        <div id="viewporter" align="center" width="100%">
+            <div id="game_canvas" style="position:relative; width:800px; height:600px;"></div>
+        </div>
+    </body>
+</html>
