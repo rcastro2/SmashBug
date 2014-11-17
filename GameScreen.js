@@ -10,9 +10,10 @@ GameScreen.prototype =
 {	
 	updateScreen:function(event){
 		this.spider.move();
+		this.scoreText.display("Score: " + this.score);
 	},
 	click: function(event){
-
+		this.score += 10
 	}
 }
 extend(GameScreen,TGE.Window);
