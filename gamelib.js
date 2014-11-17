@@ -35,7 +35,17 @@ function Sprite(game, img,e){
 	
 	this.dx = 0; this.dy = 0; this.dxsign = 1; this.dysign = 1; this.speed = 1; this.angle = Math.PI / Math.floor(Math.random() * 8 + 3);
 	this.move = function(){ myMove(this) }
-	this.moveTo = function(x,y){ myMoveTo(this,x,y) }
+	this.moveTo = function(x,y){ 
+		if(y!=null)
+			myMoveTo(this,x,y) 
+		else
+			myMoveTo(this,x.img.x,x.img.y)
+	}
+	this.x = function(){ return this.img.x }
+	this.y = function(){ return this.img.y }
+	this.visible = function(visible){
+		this.img.visible = visible;
+	}
 	this.setSpeed = function(speed,angle){ mySetSpeed(this,speed,angle) };
 	this.resize = function(percent) {myResize(this, percent / 100); }
 }
@@ -68,6 +78,14 @@ function Anim(game,sheet,r,c,f,e){
 		return this.img.currentFrame();
 	}
 	this.move = function(){myMove(this)};
+	this.moveTo = function(x,y){ 
+		if(y!=null)
+			myMoveTo(this,x,y) 
+		else
+			myMoveTo(this,x.img.x,x.img.y)
+	}
+	this.x = function(){ return this.img.x }
+	this.y = function(){ return this.img.y }
 	this.setSpeed = function(speed,angle){ mySetSpeed(this,speed,angle) };
 	this.resize = function(percent) {myResize(this, percent / 100); }
 	this.stop = function(){
@@ -75,6 +93,9 @@ function Anim(game,sheet,r,c,f,e){
 			this.img.stop()
 			this.img.visible = false;
 		}
+	}
+	this.visible = function(visible){
+		this.img.visible = visible;
 	}
 	this.play = function(fps){
 		this.img.fps = fps || this.totalFrames
