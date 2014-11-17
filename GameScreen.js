@@ -7,10 +7,9 @@ GameScreen = function(width,height)
 GameScreen.prototype =
 {	
 	updateScreen:function(event){
-		
+		this.spider.move()
 	},
 	click: function(event){
-
 
 	}
 }
