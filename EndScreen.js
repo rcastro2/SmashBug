@@ -1,49 +1,23 @@
 EndScreen = function() {
     EndScreen.superclass.constructor.apply(this, arguments);
     
-    // Background image
-	this.background = new Sprite(this,"endScreen");
-    
-	this.addChild(this.scoreDisplay = new TGE.Text().setup({
-        x : 20,
-        y : 20,
-        font : "36px Karmatic Arcade",
-		color : "#fff",
-    }));
-    
-    // Try Again button
-    this.addChild(new TGE.Button().setup({
-        x : 140,
-        y : 390,
-        scaleX : 0.5,
-        scaleY : 0.5,
-        image: "playAgain",
-        pressFunction : this.PlayAgain.bind(this),
-    }));
-    
-    return this;
+	this.background = new Sprite(this,"endScreen");    
+	this.scoreText = new Text(this);
+    this.scoreText.textColor("white");
+	this.scoreText.moveTo(50,50);
+	this.playAgain = new Sprite(this,"playAgain",true);
 }
-
 EndScreen.prototype = {
-
 	setup : function(params) {
 		EndScreen.superclass.setup.call(this, params);
-
-		//this.scoreDisplay.text = params.score.toString();
-	    
-	    return this;
+		this.scoreText.display("Final Score : " + params.score.toString());
 	},
-	updateScreen : function() {
+	updateScreen : function(event) {
 	
 	},
-
-	PlayAgain : function() {
-	    this.transitionToWindow({
-	        windowClass : GameScreen,
-	        fadeTime : 0.75
-	    });
-	}
+	click : function (event){
+		showScreen(this,StartScreen);
+	},
 }
-
-
 extend(EndScreen, TGE.Window);
+

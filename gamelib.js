@@ -16,6 +16,8 @@ function Text(game,x,y){
 		this.text.x = this.x + this.text.width;
 		this.text.text = msg;
 	}
+	this.moveTo = function(x,y) { this.x = x; this.y = y; };
+	this.textColor = function(c) { this.text.textColor = c; };
 }
 
 // Sprite Object
@@ -37,9 +39,9 @@ function Sprite(game, img,e){
 	this.move = function(){ myMove(this) }
 	this.moveTo = function(x,y){ 
 		if(y!=null)
-			myMoveTo(this,x,y) 
+			myMoveTo(this.img,x,y) 
 		else
-			myMoveTo(this,x.img.x,x.img.y)
+			myMoveTo(this.img,x.img.x,x.img.y)
 	}
 	this.x = function(){ return this.img.x }
 	this.y = function(){ return this.img.y }
@@ -80,9 +82,9 @@ function Anim(game,sheet,r,c,f,e){
 	this.move = function(){myMove(this)};
 	this.moveTo = function(x,y){ 
 		if(y!=null)
-			myMoveTo(this,x,y) 
+			myMoveTo(this.img,x,y) 
 		else
-			myMoveTo(this,x.img.x,x.img.y)
+			myMoveTo(this.img,x.img.x,x.img.y)
 	}
 	this.x = function(){ return this.img.x }
 	this.y = function(){ return this.img.y }
@@ -112,7 +114,7 @@ function mySetSpeed(obj,s,a){
 	obj.angle = Math.PI * a / 180; obj.speed = s;
 }
 function myMoveTo(obj, x, y){
-	obj.img.x = x; obj.img.y = y;
+	obj.x = x; obj.y = y;
 }
 function myMove(obj){
 	if(obj.img.x - obj.img.width / 2 < 0 || obj.img.x + obj.img.width / 2 > obj.game.width) obj.dxsign *= -1
@@ -135,11 +137,14 @@ function playSound(sound,f){
 		loop : loop
 	});
 }
-function showScreen(obj,s,info){
+function showScreen(obj,s){
 	TGE.Game.GetInstance().audioManager.StopAll();
     obj.transitionToWindow({
             windowClass : s,
             fadeTime : 0.75,
-			data : info
+			score : obj.score
     });
+}
+function round(number){
+	return Math.floor(number);
 }
