@@ -9,7 +9,7 @@ GameScreen = function(width,height)
 	this.score = 0;
 	this.timeText = new Text(this);
 	this.timeText.moveTo(200,40);
-	this.time = 10;
+	this.time = 20;
 	playSound('background_music',1)
 
 };
@@ -23,8 +23,10 @@ GameScreen.prototype =
 		this.time -= event.elapsedTime * 0.25;
 		
 		//End game when time expires
-		if(this.time < 1)
+		if(this.time < 1){
+			this.removeChild(this.spider);
 			showScreen(this,EndScreen);
+		}
 	},
 	click: function(event){
 		this.score += 10
@@ -32,17 +34,19 @@ GameScreen.prototype =
 		this.blood.play(27);
 		playSound('hit_sound');
 		
-		//Speed up the spider
-		this.spider.speed += 0.5
-		
-		//Make the spider smaller
-		this.spider.resize(-5)
-		
-		//Move spider to random location
-		x = randomNumber(100,700)
-		y = randomNumber(100,500)
-		this.spider.moveTo(x,y)
-		
+		choose = randomNumber(1,5);
+		console.log(choose);
+		if( choose == 1)
+			this.spider.speed += 2
+		else if(choose == 2)
+			this.spider.resize(-5)
+		else if(choose ==3)
+			this.spider.angle = randomNumber(45,345);
+		else{
+			x = randomNumber(100,700)
+			y = randomNumber(100,500)
+			this.spider.moveTo(x,y)
+		}
 
 	}
 }

@@ -15,6 +15,7 @@ StartScreen.prototype = {
 		this.spider.move()
 	},
 	click : function(event){
+		this.removeChild(this.spider);
 		showScreen(this,GameScreen);
 	}    
 }
