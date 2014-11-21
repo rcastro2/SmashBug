@@ -23,7 +23,7 @@ MyGame = function()
 	this.assetManager.addAssets("required",gameAssets);
 
     //Go to the StartScreen after loading
-    TGE.FirstGameWindow = StartScreen;
+    TGE.FirstGameWindow = GameScreen;
 }
 //MyGame functions
 MyGame.prototype =
